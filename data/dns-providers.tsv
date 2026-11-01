@@ -1,0 +1,4 @@
+# name	ipv4 servers	ipv6 servers	DoT hostname	DoH URL
+Cloudflare	1.1.1.1 1.0.0.1	2606:4700:4700::1111 2606:4700:4700::1001	cloudflare-dns.com	https://cloudflare-dns.com/dns-query
+Google	8.8.8.8 8.8.4.4	2001:4860:4860::8888 2001:4860:4860::8844	dns.google	https://dns.google/dns-query
+Quad9	9.9.9.9 149.112.112.112	2620:fe::fe 2620:fe::9	dns.quad9.net	https://dns.quad9.net/dns-query

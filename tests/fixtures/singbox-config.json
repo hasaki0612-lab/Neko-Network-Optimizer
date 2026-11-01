@@ -1,0 +1,98 @@
+{
+  // sing-box server config used by the Neko test-suite (comments are allowed by sing-box)
+  "log": { "level": "warn" },
+  "dns": {
+    "servers": [
+      { "tag": "google", "type": "tls", "server": "8.8.8.8" },
+      { "tag": "local", "type": "local" }
+    ]
+  },
+  "inbounds": [
+    {
+      "type": "vless",
+      "tag": "vless-reality",
+      "listen": "::",
+      "listen_port": 443,
+      "users": [
+        { "name": "alice", "uuid": "11111111-2222-4333-8444-555555555555", "flow": "xtls-rprx-vision" }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "www.microsoft.com",
+        "reality": {
+          "enabled": true,
+          "handshake": { "server": "www.microsoft.com", "server_port": 443 },
+          "private_key": "dwdtCnMYpX08FsFyUbJmRd9ML4frwJkqsXf7pR25LCo",
+          "short_id": ["0123456789abcdef", "ab"]
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "vmess-ws",
+      "listen": "0.0.0.0",
+      "listen_port": 8443,
+      "users": [{ "name": "bob", "uuid": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee", "alterId": 0 }],
+      "tls": { "enabled": true, "certificate_path": "/etc/sing-box/leaf.pem", "key_path": "/etc/sing-box/leaf.key" },
+      "transport": { "type": "ws", "path": "/vmws", "headers": { "Host": "cdn.example.net" } }
+    },
+    {
+      "type": "trojan",
+      "tag": "trojan",
+      "listen_port": 8444,
+      "users": [{ "name": "carol", "password": "p@ss w0rd/&" }],
+      "tls": { "enabled": true, "server_name": "example.com", "alpn": ["h2", "http/1.1"] }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "ss2022",
+      "listen_port": 8388,
+      "method": "2022-blake3-aes-128-gcm",
+      "password": "c2VydmVyUFNLMDEyMzQ1Ng==",
+      "users": [{ "name": "dave", "password": "dXNlclBTSzAxMjM0NTY3OA==" }]
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "ss-aead",
+      "listen_port": 8389,
+      "method": "aes-128-gcm",
+      "password": "simplepass"
+    },
+    {
+      "type": "hysteria2",
+      "tag": "hy2",
+      "listen_port": 8443,
+      "up_mbps": 100,
+      "down_mbps": 500,
+      "obfs": { "type": "salamander", "password": "obfspw" },
+      "users": [{ "name": "erin", "password": "hy2pass" }],
+      "tls": { "enabled": true, "alpn": ["h3"], "certificate_path": "/etc/sing-box/self.pem", "key_path": "/etc/sing-box/self.key" }
+    },
+    {
+      "type": "tuic",
+      "tag": "tuic",
+      "listen_port": 8445,
+      "congestion_control": "bbr",
+      "users": [{ "name": "frank", "uuid": "99999999-8888-4777-8666-555555555555", "password": "tuicpw" }],
+      "tls": { "enabled": true, "server_name": "example.com", "alpn": ["h3"] }
+    },
+    {
+      "type": "anytls",
+      "tag": "anytls",
+      "listen_port": 8446,
+      "users": [{ "name": "gina", "password": "anypw" }],
+      "tls": { "enabled": true, "server_name": "example.com" }
+    },
+    {
+      "type": "vless",
+      "tag": "vless-local",
+      "listen": "127.0.0.1",
+      "listen_port": 10000,
+      "users": [{ "uuid": "12121212-3434-4565-8787-909090909090" }],
+      "transport": { "type": "ws", "path": "/local" }
+    },
+    /* not a proxy protocol: must be ignored */
+    { "type": "mixed", "tag": "mixed-in", "listen": "127.0.0.1", "listen_port": 2080 }
+  ],
+  "outbounds": [{ "type": "direct", "tag": "direct" }]
+}

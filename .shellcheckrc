@@ -1,0 +1,4 @@
+# Neko is a set of files sourced into one shell: globals assigned in one file
+# are read in another, which ShellCheck cannot see across `source` calls.
+disable=SC2034
+shell=bash

@@ -1,0 +1,75 @@
+{
+  "log": { "loglevel": "warning" },
+  "dns": { "servers": ["1.1.1.1", "localhost"] },
+  "inbounds": [
+    {
+      "tag": "xr-reality",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [{ "id": "33333333-4444-4555-8666-777777777777", "flow": "xtls-rprx-vision", "email": "x1" }],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "raw",
+        "security": "reality",
+        "realitySettings": {
+          "target": "www.apple.com:443",
+          "serverNames": ["www.apple.com", "images.apple.com"],
+          "privateKey": "dwdtCnMYpX08FsFyUbJmRd9ML4frwJkqsXf7pR25LCo",
+          "shortIds": ["", "abcd"]
+        }
+      }
+    },
+    {
+      "tag": "xr-xhttp",
+      "port": 2053,
+      "protocol": "vless",
+      "settings": { "clients": [{ "id": "44444444-5555-4666-8777-888888888888" }], "decryption": "none" },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "example.org", "alpn": ["h2"], "certificates": [{ "certificateFile": "/etc/xray/leaf.pem" }] },
+        "xhttpSettings": { "path": "/xh", "mode": "auto" }
+      }
+    },
+    {
+      "tag": "xr-vmess",
+      "port": "10086",
+      "protocol": "vmess",
+      "settings": { "clients": [{ "id": "55555555-6666-4777-8888-999999999999", "alterId": 0 }] }
+    },
+    {
+      "tag": "xr-trojan-grpc",
+      "port": 2083,
+      "protocol": "trojan",
+      "settings": { "clients": [{ "password": "trojanpw", "email": "t1" }] },
+      "streamSettings": {
+        "network": "grpc",
+        "security": "tls",
+        "tlsSettings": { "serverName": "example.org" },
+        "grpcSettings": { "serviceName": "grpcsvc" }
+      }
+    },
+    {
+      "tag": "xr-ss",
+      "port": 8390,
+      "protocol": "shadowsocks",
+      "settings": { "method": "chacha20-ietf-poly1305", "password": "sspw", "network": "tcp,udp" }
+    },
+    {
+      "tag": "xr-vless-enc",
+      "port": 8391,
+      "protocol": "vless",
+      "settings": { "clients": [{ "id": "66666666-7777-4888-8999-000000000000" }], "decryption": "mlkem768x25519plus.native.600s.SERVERKEY" }
+    },
+    {
+      "tag": "xr-range",
+      "port": "20000-20010",
+      "protocol": "vmess",
+      "settings": { "clients": [{ "id": "77777777-8888-4999-8000-111111111111" }] }
+    },
+    { "tag": "api", "port": 10085, "listen": "127.0.0.1", "protocol": "dokodemo-door", "settings": { "address": "127.0.0.1" } }
+  ],
+  "outbounds": [{ "protocol": "freedom" }]
+}

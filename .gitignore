@@ -1,0 +1,33 @@
+# --- Build output (rebuilt by tools/build-release.sh) ---
+dist/
+
+# --- Test temp files and test run logs (kept on disk, not versioned) ---
+.test-tmp/
+test-logs/
+*.tmp
+
+# --- Exports can contain node credentials: never commit them ---
+Neko-Export/
+neko-reports/
+/nodes.txt
+/subscription.txt
+/singbox-config.json
+/mihomo-config.yaml
+/qr/
+
+# --- Keys, certificates and local secrets ---
+# tests/fixtures/certs holds generated public test certificates only (no keys)
+*.key
+*.p12
+*.pfx
+*.pem
+!tests/fixtures/certs/*.pem
+.env
+.env.*
+
+# --- Local tool / editor state ---
+.claude/settings.local.json
+*.swp
+*~
+.DS_Store
+Thumbs.db

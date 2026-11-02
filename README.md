@@ -122,4 +122,4 @@ bash tools/build-release.sh   # 生成 dist/neko-vX.Y.Z.tar.gz 与 .sha256
 
 ## 许可证
 
-尚未选定。请在发布前添加 LICENSE 文件。
+本项目经由**MIT许可证**开源
